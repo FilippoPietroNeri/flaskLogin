@@ -5,7 +5,7 @@ function login()
     const username = document.getElementById('username');
     const password = document.getElementById('password');
 
-    fetch('https://3246-filippopietr-flasklogin-q9kbk79e0gr.ws-eu111.gitpod.io/login/fetch', {
+    fetch('/login/fetch', {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
@@ -17,11 +17,11 @@ function login()
     }).then((response) => response.json())
     .then((data) => {
         if (data.code == 200) {
-            const user = JSON.parse(data.user);
+            const user = JSON.parse(data.user)[0];
             alert.style.display = "block";
             alert.classList.remove("alert-danger");
             alert.classList.add("alert-success");
-            alert.innerHTML = `Logged as <b>${user.Nome[0]} ${user.Cognome[0]}</b>`;
+            alert.innerHTML = `Logged as <b>${user.Nome} ${user.Cognome}</b>`;
         } else if (data.code == 302) {
             alert.style.display = "block";
             alert.classList.remove("alert-success");
